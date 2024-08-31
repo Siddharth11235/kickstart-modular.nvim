@@ -1,20 +1,39 @@
-return {
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+-- lua/kickstart/plugins/colorschemes.lua
 
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+return {
+  {
+    -- Tokyonight colorscheme plugin
+    'folke/tokyonight.nvim',
+    priority = 1000, -- ensure this loads before other start plugins
+    config = function()
+      -- configure the tokyonight colorscheme
+      require('tokyonight').setup {
+        style = 'night', -- choose the style: 'storm', 'night', 'moon', 'day'
+        transparent = true, -- enable transparency to allow the terminal's background image to show
+        terminal_colors = true, -- use the theme colors in the terminal
+        sidebars = { 'qf', 'help' }, -- apply a different background for certain windows
+      }
+
+      -- load the colorscheme
+      vim.cmd 'colorscheme tokyonight-night'
+
+      -- customize highlights further if needed
+      vim.cmd 'highlight Normal guibg=NONE ctermbg=NONE' -- ensure normal background is transparent
+      vim.cmd 'highlight Comment gui=none' -- example: customize Comment style
+    end,
+  },
+
+  {
+    -- Gruvbox colorscheme plugin
+    'morhetz/gruvbox',
+    priority = 1000, -- optional; adjust if you have specific load order requirements
+    config = function()
+      vim.g.gruvbox_contrast_dark = 'hard' -- optional: set contrast level for gruvbox
+      vim.cmd 'colorscheme gruvbox'
+
+      -- make sure the background is transparent to show the terminal image
+      vim.cmd 'highlight Normal guibg=NONE ctermbg=NONE'
+      vim.cmd 'highlight Comment gui=none' -- example: customize Comment style
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et
