@@ -18,7 +18,7 @@ return {
     close_if_last_window = true, -- automatically close neo-tree if it's the last open window
     popup_border_style = 'rounded', -- aesthetic border for popups
     filesystem = {
-      follow_current_file = true, -- sync explorer with current buffer
+      follow_current_file = { enabled = true }, -- sync explorer with current buffer
       hijack_netrw = true, -- replace the default netrw file explorer
       use_libuv_file_watcher = true, -- auto-update file tree when changes are made outside of neovim
       filtered_items = {
@@ -37,7 +37,7 @@ return {
       },
     },
     buffers = {
-      follow_current_file = true, -- sync buffer view with the current buffer
+      follow_current_file = { enabled = true }, -- sync buffer view with the current buffer
       group_empty_dirs = true, -- group empty directories together
     },
   },
